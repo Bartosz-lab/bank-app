@@ -13,6 +13,13 @@
             </div>
         {% endfor %}
         {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="notification {% if message.tags %}is-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
         <form method="POST" action="{% url 'authenticate:login' %}">
             {% csrf_token %}
             <div class="field">
@@ -27,9 +34,9 @@
             </div>
             <div class="buttons">
                 <button class="button is-block is-info is-large is-fullwidth">Login</button>
-                {% comment %} <a href="{% url 'password_reset' %}" class="button is-block is-info is-large is-fullwidth">
+                <a href="{% url 'authenticate:password_reset' %}" class="button is-block is-info is-large is-fullwidth">
                     Reset Password
-                </a>  {% endcomment %}
+                </a>
             </div>
             <input type="hidden" name="next" value="{{ next }}">
         </form>

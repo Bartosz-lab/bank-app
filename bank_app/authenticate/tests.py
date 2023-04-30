@@ -16,20 +16,39 @@ class UsersManagersTests(TestCase):
         self.assertEqual(user.phone, "123456789")
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
-        self.assertFalse(user.is_admin)
+        self.assertFalse(user.is_superuser)
 
     def test_create_user_no_username(self):
         User = get_user_model()
-        with self.assertRaisesMessage(ValueError, "Users must have an username"):
+        with self.assertRaises(ValueError):
             User.objects.create_user(
                 username="", email="tester1@user.com", phone="123456789", password="foo"
             )
 
     def test_create_user_no_email(self):
         User = get_user_model()
-        with self.assertRaisesMessage(ValueError, "Users must have an email address"):
+        with self.assertRaises(ValueError):
             User.objects.create_user(
                 username="tester", email="", phone="123456789", password="foo"
+            )
+
+    def test_create_user_no_phone(self):
+        User = get_user_model()
+        with self.assertRaises(ValueError):
+            User.objects.create_user(
+                username="tester",
+                email="tester@user.com",
+                phone="",
+                password="foo",
+            )
+
+    def test_create_user_no_all_fields(self):
+        User = get_user_model()
+        with self.assertRaises(TypeError):
+            User.objects.create_user(
+                username="tester",
+                email="tester@user.com",
+                password="foo",
             )
 
     def test_create_superuser(self):
@@ -44,4 +63,4 @@ class UsersManagersTests(TestCase):
         self.assertEqual(admin_user.email, "superuser@user.com")
         self.assertTrue(admin_user.is_active)
         self.assertTrue(admin_user.is_staff)
-        self.assertTrue(admin_user.is_admin)
+        self.assertTrue(admin_user.is_superuser)

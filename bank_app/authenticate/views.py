@@ -1,20 +1,18 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib import messages
 
 from .forms import UserCreationForm
-
-
-def index(request):
-    return render(request, "user_profile/index.html")
 
 
 def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request)
-            return redirect("user_profile:index")
+            form.save()
+            messages.add_message(
+                request, messages.SUCCESS, "You can now login to your account"
+            )
+            return redirect("authenticate:login")
 
     else:
         form = UserCreationForm()

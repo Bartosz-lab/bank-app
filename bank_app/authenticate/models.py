@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
 )
+from django.core.validators import EmailValidator
 
 
 class BankUserManager(BaseUserManager):
@@ -12,11 +13,11 @@ class BankUserManager(BaseUserManager):
         Creates and saves a User with the given username, email, phone and password.
         """
         if not username:
-            raise ValueError("Users must have an username")
+            raise ValueError("Users must have a username")
         if not email:
             raise ValueError("Users must have an email address")
         if not phone:
-            raise ValueError("Users must have an phone number")
+            raise ValueError("Users must have a phone number")
 
         user = self.model(
             username=username,
@@ -50,6 +51,7 @@ class BankUser(AbstractBaseUser, PermissionsMixin):
         verbose_name="email address",
         max_length=255,
         unique=True,
+        validators=[EmailValidator],
     )
     phone = models.CharField(max_length=12, help_text="Contact phone number")
     is_active = models.BooleanField(default=True)

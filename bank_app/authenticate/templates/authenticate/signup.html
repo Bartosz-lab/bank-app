@@ -46,15 +46,12 @@
             </div>
             <div class="field">
                 <div class="control">
-                    {{ form.password1  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:Password"}}
+                    {% if form.password2.errors %}
+                        {{ form.password1  | add_class:"input is-large is-danger" | attr:"placeholder:New Password"}}
+                    {% else %}
+                        {{ form.password1  | add_class:"input is-large" | attr:"placeholder:New Password"}}
+                    {% endif %}
                 </div>
-                {% if form.password1.errors %}
-                <ul>
-                    {% for error in form.password1.errors %}
-                        <li class="help is-large is-danger">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
             </div>
             <div class="field">
                 <div class="control">
