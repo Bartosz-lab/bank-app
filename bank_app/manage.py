@@ -6,7 +6,11 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bank_app.settings.local_settings")
+    settings = "bank_app.settings.base_settings"
+    if os.path.isfile(".bank_app/settings/local_settings.py"):
+        settings = "bank_app.settings.local_settings"
+
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
