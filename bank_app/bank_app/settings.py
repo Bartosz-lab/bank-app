@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "main_page.apps.MainPageConfig",
+    "main_page",
+    "user_profile",
+    "authenticate",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -81,9 +84,22 @@ DATABASES = {
     }
 }
 
+# Auth
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# AUTHENTICATION_BACKENDS
+
+AUTH_USER_MODEL = "authenticate.BankUser"
+
+LOGIN_REDIRECT_URL = "user_profile:index"
+
+LOGIN_URL = "/auth/login"
+
+LOGOUT_REDIRECT_URL = "main_page:index"
+
+# PASSWORD_RESET_TIMEOUT
+
+# PASSWORD_HASHERS
 
 AUTH_PASSWORD_VALIDATORS = [
     {

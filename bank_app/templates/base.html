@@ -20,8 +20,8 @@
                             <a href="{% url 'main_page:index' %}" class="navbar-item">
                                 Home
                             </a>
+                            {% if user.is_authenticated %}
                             {% comment %} 
-                            {% if current_user.is_authenticated %}
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a href="{{ url_for('transfer.list') }}" class="navbar-link">
                                     Transfers
@@ -32,30 +32,29 @@
                                     </a>
                                 </div>
                             </div>
+                            {% endcomment %}
                             <div class="navbar-item has-dropdown is-hoverable">
-                                <a href="{{ url_for('main.profile') }}" class="navbar-link">
+                                <a href="{% url 'user_profile:index' %}" class="navbar-link">
                                     Profile
                                 </a>
                                 <div class="navbar-dropdown has-text-black">
-                                    <a href="{{ url_for('auth.changepass') }}" class="navbar-item">
+                                    <a href="{% url 'authenticate:password_change' %}" class="navbar-item">
                                         Change Password
+                                    </a>
+                                    <a href="{% url 'authenticate:logout' %}" class="navbar-item">
+                                        Logout
                                     </a>
                                 </div>
                             </div>
                             {% endif %}
-                            {% if not current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                            {% if not user.is_authenticated %}
+                            <a href="{% url 'authenticate:login' %}" class="navbar-item">
                                 Login
                             </a>
-                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                            <a href="{% url 'authenticate:signup' %}" class="navbar-item">
                                 Sign Up
                             </a>
                             {% endif %}
-                            {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                                Logout
-                            </a>
-                            {% endif %} {% endcomment %}
                         </div>
                     </div>
                 </div>
