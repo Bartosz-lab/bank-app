@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">New Transfer</h3>
+    <div class="box">
+        <form id="transferForm" method="POST" action="{% url 'transfers:new'%}">
+            {% csrf_token %}
+            <div class="field">
+                <div class="control">
+                    {{ form.title  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:Title"}}
+                </div>
+                {% if form.title.errors %}
+                <ul>
+                    {% for error in form.title.errors %}
+                        <li class="help is-large is-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="field">
+                <div class="control">
+                    {{ form.recipient  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:Recipient"}}
+                </div>
+                {% if form.recipient.errors %}
+                <ul>
+                    {% for error in form.recipient.errors %}
+                        <li class="help is-large is-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="field">
+                <div class="control">
+                    {{ form.date  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:Date"}}
+                </div>
+                {% if form.date.errors %}
+                <ul>
+                    {% for error in form.date.errors %}
+                        <li class="help is-large is-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="field">
+                <div class="control">
+                    {{ form.amount  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:Amount"}}
+                </div>
+                {% if form.amount.errors %}
+                <ul>
+                    {% for error in form.amount.errors %}
+                        <li class="help is-large is-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="field">
+                <div class="control">
+                    {{ form.iban  | add_class:"input is-large" | add_error_class:"is-danger" | attr:"placeholder:IBAN"}}
+                </div>
+                {% if form.iban.errors %}
+                <ul>
+                    {% for error in form.iban.errors %}
+                        <li class="help is-large is-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

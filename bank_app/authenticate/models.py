@@ -4,7 +4,12 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
 )
-from django.core.validators import EmailValidator, RegexValidator
+from django.core.validators import (
+    EmailValidator,
+    RegexValidator,
+    MaxLengthValidator,
+    MinLengthValidator,
+)
 
 
 class BankUserManager(BaseUserManager):
@@ -46,7 +51,11 @@ class BankUserManager(BaseUserManager):
 
 
 class BankUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(
+        max_length=30,
+        unique=True,
+        validators=[MinLengthValidator(5), MaxLengthValidator(30)],
+    )
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,

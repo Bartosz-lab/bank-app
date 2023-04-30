@@ -21,18 +21,16 @@
                                 Home
                             </a>
                             {% if user.is_authenticated %}
-                            {% comment %} 
                             <div class="navbar-item has-dropdown is-hoverable">
-                                <a href="{{ url_for('transfer.list') }}" class="navbar-link">
+                                <a href="{% url 'transfers:list' %}" class="navbar-link">
                                     Transfers
                                 </a>
                                 <div class="navbar-dropdown has-text-black">
-                                    <a href="{{ url_for('transfer.new') }}" class="navbar-item">
+                                    <a href="{% url 'transfers:new' %}" class="navbar-item">
                                         New Transfer
                                     </a>
                                 </div>
                             </div>
-                            {% endcomment %}
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <a href="{% url 'user_profile:index' %}" class="navbar-link">
                                     Profile

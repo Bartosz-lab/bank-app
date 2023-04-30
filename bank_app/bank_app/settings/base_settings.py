@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "main_page",
     "user_profile",
+    "transfers",
     "authenticate",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -138,3 +139,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+TRANSFER_CONFIRM_TIME = 60

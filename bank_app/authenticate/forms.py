@@ -3,10 +3,6 @@ from django.contrib.auth import get_user_model, password_validation
 from django.core.exceptions import ValidationError
 
 
-def validate_phone(value):
-    pass
-
-
 class BaseUserCreationForm(forms.ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
