@@ -1,5 +1,10 @@
+from http import HTTPStatus
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.http import HttpRequest
+
+from .forms import UserCreationForm
 
 
 class UsersManagersTests(TestCase):
@@ -64,3 +69,44 @@ class UsersManagersTests(TestCase):
         self.assertTrue(admin_user.is_active)
         self.assertTrue(admin_user.is_staff)
         self.assertTrue(admin_user.is_superuser)
+
+
+class UserCreationFormTest(TestCase):
+    def test_valid_user(self):
+        response = self.client.post(
+            "/auth/signup",
+            data={
+                "username": "tester1",
+                "email": "tester1@example.com",
+                "phone": "123456789",
+                "password1": "Password1@",
+                "password2": "Password1@",
+            },
+        )
+        self.assertEqual(response.status_code, HTTPStatus.MOVED_PERMANENTLY)
+
+    def test_phone_validator(self):
+        request = HttpRequest()
+        request.POST = {
+            "username": "tester1",
+            "email": "tester1@example.com",
+            "phone": "123 456 78",
+            "password1": "Password1@",
+            "password2": "Password1@",
+        }
+        form = UserCreationForm(request.POST)
+        self.assertFormError(
+            form=form, field="phone", errors=["Enter a valid phone number."]
+        )
+
+    def test_phone_validator2(self):
+        request = HttpRequest()
+        request.POST = {
+            "username": "tester1",
+            "email": "tester1@example.com",
+            "phone": "+48123456789",
+            "password1": "Password1@",
+            "password2": "Password1@",
+        }
+        form = UserCreationForm(request.POST)
+        self.assertFormError(form=form, field=None, errors=[])

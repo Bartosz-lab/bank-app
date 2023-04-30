@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
 )
-from django.core.validators import EmailValidator
+from django.core.validators import EmailValidator, RegexValidator
 
 
 class BankUserManager(BaseUserManager):
@@ -53,7 +53,13 @@ class BankUser(AbstractBaseUser, PermissionsMixin):
         unique=True,
         validators=[EmailValidator],
     )
-    phone = models.CharField(max_length=12, help_text="Contact phone number")
+    phone = models.CharField(
+        max_length=12,
+        help_text="Contact phone number",
+        validators=[
+            RegexValidator("^(\+48)?\d{9}$", message="Enter a valid phone number.")
+        ],
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
