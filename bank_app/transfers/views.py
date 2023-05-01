@@ -46,12 +46,12 @@ class ConfirmView(LoginRequiredMixin, generic.FormView):
     template_name = "transfers/confirm.html"
 
     def get_form_kwargs(self):
-        kwargs = super(ConfirmView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs["auth_code"] = self.get_toconfirm_or_404().auth_code
         return kwargs
 
     def get_context_data(self, **kwargs):
-        context = super(ConfirmView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["transfer"] = self.get_toconfirm_or_404()
         return context
 

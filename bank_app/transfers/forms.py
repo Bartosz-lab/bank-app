@@ -31,7 +31,7 @@ class AuthCodeValidator:
 
 class ConfirmTransferForm(forms.Form):
     def __init__(self, auth_code, *args, **kwargs):
-        super(ConfirmTransferForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["auth_code"] = forms.CharField(
             required=False,
             min_length=6,
