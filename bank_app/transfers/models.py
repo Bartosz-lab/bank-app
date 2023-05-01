@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now, timedelta
+from django.core.exceptions import ValidationError
 from django.core.validators import (
     RegexValidator,
     DecimalValidator,
@@ -9,6 +11,17 @@ from django.core.validators import (
 )
 
 
+def date_in_past_validator(value):
+    if value < now().date():
+        raise ValidationError("The date cannot be in the past!")
+    return value
+
+
+def date_in_future_validator(value):
+    if value > now().date() + timedelta(days=365):
+        raise ValidationError("The date cannot be later then 365 days from now!")
+
+
 class BaseTransfer(models.Model):
     title = models.CharField(
         max_length=50, validators=[MinLengthValidator(5), MaxLengthValidator(50)]
@@ -16,7 +29,9 @@ class BaseTransfer(models.Model):
     recipient = models.CharField(
         max_length=50, validators=[MinLengthValidator(5), MaxLengthValidator(50)]
     )
-    date = models.DateField()
+    date = models.DateField(
+        validators=[date_in_past_validator, date_in_future_validator]
+    )
     amount = models.DecimalField(
         decimal_places=2,
         max_digits=20,

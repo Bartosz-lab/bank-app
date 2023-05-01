@@ -1,14 +1,14 @@
 from secrets import choice
 from string import digits
-from datetime import timedelta
 
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views import generic
-from django.utils import timezone
+from django.utils.timezone import now, timedelta
 from django.conf import settings
+from django.http import Http404
 
 from .forms import NewTransferForm, ConfirmTransferForm
 from .models import Transfer, TransferToConfirm
@@ -47,7 +47,7 @@ class ConfirmView(LoginRequiredMixin, generic.FormView):
 
     def get_form_kwargs(self):
         kwargs = super(ConfirmView, self).get_form_kwargs()
-        kwargs["confirm_id"] = self.kwargs["confirm_id"]
+        kwargs["auth_code"] = self.get_toconfirm_or_404().auth_code
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -74,13 +74,15 @@ class ConfirmView(LoginRequiredMixin, generic.FormView):
             TransferToConfirm,
             pk=self.kwargs["confirm_id"],
             user=self.request.user,
-            created__gte=timezone.now()
-            - timedelta(seconds=settings.TRANSFER_CONFIRM_TIME),
+            created__gte=now() - timedelta(seconds=settings.TRANSFER_CONFIRM_TIME),
         )
 
 
 class RejectView(LoginRequiredMixin, generic.TemplateView):
     template_name = "transfers/reject.html"
+
+    def get(self, _, reject_id):
+        raise Http404("Page not found")
 
     def post(self, _, reject_id):
         transfer = get_object_or_404(
