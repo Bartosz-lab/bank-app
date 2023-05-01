@@ -50,6 +50,9 @@ class BaseTransfer(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return f"Transfer {self.pk}"
+
 
 class Transfer(BaseTransfer):
     pass
