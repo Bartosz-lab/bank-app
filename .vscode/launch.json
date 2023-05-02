@@ -8,7 +8,8 @@
             "name": "Django: Run",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/bank_app/manage.py",
+            "cwd": "${workspaceFolder}/bank_app",
+            "program": "./manage.py",
             "args": [
                 "runserver",
             ],
