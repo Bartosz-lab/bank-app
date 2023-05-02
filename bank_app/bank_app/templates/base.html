@@ -15,7 +15,12 @@
         <div class="hero-head">
             <nav class="navbar">
                 <div class="container">
-                    <div id="navbarMenuHeroA" class="navbar-menu">
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                    <div class="navbar-menu">
                         <div class="navbar-end">
                             <a href="{% url 'main_page:index' %}" class="navbar-item">
                                 Home
@@ -67,5 +72,14 @@
         </div>
     </section>
 </body>
+<script>
+    const burgerIcon = document.querySelector(".navbar-burger")
+    const navbarMenu = document.querySelector(".navbar-menu")
+
+    burgerIcon.addEventListener('click', () => {
+        burgerIcon.classList.toggle('is-active');
+        navbarMenu.classList.toggle('is-active');
+    });
+</script>
 
 </html>
