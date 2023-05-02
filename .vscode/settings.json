@@ -1,5 +1,6 @@
 {
     "python.defaultInterpreterPath": "venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
     "files.exclude": {
       ".vscode": true,
       "**/venv": true,

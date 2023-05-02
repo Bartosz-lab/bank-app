@@ -11,7 +11,6 @@
             "program": "${workspaceFolder}/bank_app/manage.py",
             "args": [
                 "runserver",
-                "--settings=bank_app.settings.local_settings"
             ],
             "django": true,
             "justMyCode": true
