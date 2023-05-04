@@ -17,17 +17,13 @@ spec:
     - key: DJANGO_SECRET_KEY
       scope: RUN_AND_BUILD_TIME
       type: SECRET
-      value: ""
     - key: DJANGO_EMAIL_HOST
       scope: RUN_AND_BUILD_TIME
-      value: ""
     - key: DJANGO_EMAIL_HOST_PASSWORD
       scope: RUN_AND_BUILD_TIME
       type: SECRET
-      value: ""
     - key: DJANGO_EMAIL_HOST_USER
       scope: RUN_AND_BUILD_TIME
-      value: ""
     - key: DJANGO_EMAIL_PORT
       scope: RUN_AND_BUILD_TIME
       value: "587"
@@ -36,7 +32,6 @@ spec:
       value: "True"
     - key: DJANGO_DEFAULT_FROM_EMAIL
       scope: RUN_AND_BUILD_TIME
-      value: ""
     git:
       branch: main
       repo_clone_url: https://github.com/Bartosz-lab/bank-app.git
