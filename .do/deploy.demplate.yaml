@@ -1,8 +1,44 @@
 spec:
-  name: sample-python
+  name: bank-app
+  databases:
+  - name: db
   services:
   - environment_slug: python
+    envs:
+    - key: DATABASE_URL
+      scope: RUN_TIME
+      value: ${db.DATABASE_URL}
+    - key: DJANGO_ALLOWED_HOSTS
+      scope: RUN_AND_BUILD_TIME
+      value: ${APP_DOMAIN}
+    - key: DEBUG
+      scope: RUN_AND_BUILD_TIME
+      value: "True"
+    - key: DJANGO_SECRET_KEY
+      scope: RUN_AND_BUILD_TIME
+      type: SECRET
+      value: ""
+    - key: DJANGO_EMAIL_HOST
+      scope: RUN_AND_BUILD_TIME
+      value: ""
+    - key: DJANGO_EMAIL_HOST_PASSWORD
+      scope: RUN_AND_BUILD_TIME
+      type: SECRET
+      value: ""
+    - key: DJANGO_EMAIL_HOST_USER
+      scope: RUN_AND_BUILD_TIME
+      value: ""
+    - key: DJANGO_EMAIL_PORT
+      scope: RUN_AND_BUILD_TIME
+      value: "587"
+    - key: DJANGO_EMAIL_USE_TLS
+      scope: RUN_AND_BUILD_TIME
+      value: "True"
+    - key: DJANGO_DEFAULT_FROM_EMAIL
+      scope: RUN_AND_BUILD_TIME
+      value: ""
     git:
       branch: main
-      repo_clone_url: https://github.com/digitalocean/sample-python.git
-    name: sample-python
+      repo_clone_url: https://github.com/Bartosz-lab/bank-app.git
+    name: bank-app
+    source_dir: bank_app
