@@ -1,1 +1,1 @@
-gunicorn --worker-tmp-dir /dev/shm --workers=4 bank_app.wsgi
+web: gunicorn --worker-tmp-dir /dev/shm --workers=4 bank_app.wsgi
