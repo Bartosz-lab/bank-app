@@ -1,5 +1,17 @@
 spec:
   name: bank-app
+  ingress:
+    rules:
+    - component:
+        name: bank-app
+      match:
+        path:
+          prefix: /
+    - component:
+        name: static-files
+      match:
+        path:
+          prefix: /static
   databases:
   - name: db
   static_sites:
@@ -7,7 +19,7 @@ spec:
     git:
       branch: main
       repo_clone_url: https://github.com/Bartosz-lab/bank-app.git
-    name: static
+    name: static-files
     output_dir: staticfiles
     source_dir: bank_app
   services:
