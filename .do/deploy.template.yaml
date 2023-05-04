@@ -2,6 +2,14 @@ spec:
   name: bank-app
   databases:
   - name: db
+  static_sites:
+  - environment_slug: python
+    git:
+      branch: main
+      repo_clone_url: https://github.com/Bartosz-lab/bank-app.git
+    name: static
+    output_dir: staticfiles
+    source_dir: bank_app
   services:
   - environment_slug: python
     envs:

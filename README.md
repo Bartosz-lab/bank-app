@@ -1,9 +1,12 @@
 # bank-app
 Bank app for "Wstęp do Bezpieczeństwa Komputerowego" course
 
-
 [![Deploy to DO](https://www.deploytodo.com/do-btn-white.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Bartosz-lab/bank-app/tree/main&refcode=1ef7822c5071)
 
+### After deploy
+Go to Console tab and perform the Django first launch tasks:
+* `python manage.py migrate` - This will perform your initial database migrations.
+* `python manage.py createsuperuser` - This will prompt you for some information to create an administrative user.
 
 Todo:
 1. Add automatic customer group for new accounts
