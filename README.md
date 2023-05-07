@@ -8,6 +8,17 @@ Go to Console tab and perform the Django first launch tasks:
 * `python manage.py migrate` - This will perform your initial database migrations.
 * `python manage.py createsuperuser` - This will prompt you for some information to create an administrative user.
 
+
+## Deploy on Docker
+Run `docker compose up -d --build`
+
+### After deploy
+Run this commands to perform the Django first launch tasks:
+* `docker compose exec web python manage.py migrate --noinput` - This will perform your initial database migrations.
+* `docker compose exec web python manage.py collectstatic --noinput` - This will collect all staticfiles.
+* `docker compose exec web python manage.py createsuperuser` - This will prompt you for some information to create an administrative user.
+
+
 Todo:
 1. Add automatic customer group for new accounts
 2. createuserform is it ok? self.error_messages["password_mismatch"] not defined

@@ -1,1 +1,1 @@
-web: gunicorn --worker-tmp-dir /dev/shm --workers=4 bank_app.wsgi
+web: uwsgi --http :8000 --module bank_app.wsgi:application --processes 5
