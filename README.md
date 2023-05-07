@@ -1,4 +1,4 @@
-# bank-app
+# The Best Bank Ever APP
 Bank app for "Wstęp do Bezpieczeństwa Komputerowego" course
 
 [![Deploy to DO](https://www.deploytodo.com/do-btn-white.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Bartosz-lab/bank-app/tree/main&refcode=1ef7822c5071)
@@ -18,6 +18,9 @@ Run this commands to perform the Django first launch tasks:
 * `docker compose exec web python manage.py collectstatic --noinput` - This will collect all staticfiles.
 * `docker compose exec web python manage.py createsuperuser` - This will prompt you for some information to create an administrative user.
 
+
+## Chrome extesnion
+With this extension the iban number is replaced to different on `/transfers/new` and `/transfers/confirm` pages 
 
 Todo:
 1. Add automatic customer group for new accounts

