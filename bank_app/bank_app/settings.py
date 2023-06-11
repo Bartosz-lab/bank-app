@@ -74,6 +74,7 @@ TEMPLATES = [
         "DIRS": ["bank_app/templates/"],
         "APP_DIRS": True,
         "OPTIONS": {
+            "autoescape": False,
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
@@ -199,3 +200,22 @@ if os.getenv("DEBUG", "False") != "True":
     SECURE_HSTS_SECONDS = 60
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "sql.log",
+        },
+    },
+    "loggers": {
+        "django.db.backends": {
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
+        },
+    },
+}
