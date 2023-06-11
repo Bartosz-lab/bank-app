@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load widget_tweaks %}
+{% load socialaccount %}
 
 {% block content %}
 <div class="column is-4 is-offset-4">
@@ -20,6 +21,15 @@
             </div>
         {% endfor %}
         {% endif %}
+        <form action="{% provider_login_url 'google' %}" method="post" class="buttons">
+            {% csrf_token %}
+            <button class="button is-block is-info is-large is-fullwidth">Login With Google</button>
+        </form>
+        <form action="{% provider_login_url 'digitalocean' %}" method="post" class="buttons">
+            {% csrf_token %}
+            <button class="button is-block is-info is-large is-fullwidth">Login With DigitalOcean</button>
+        </form>
+        
         <form method="POST" action="{% url 'authenticate:login' %}">
             {% csrf_token %}
             <div class="field">
