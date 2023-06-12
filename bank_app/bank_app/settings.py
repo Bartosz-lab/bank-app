@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "csp.middleware.CSPMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -200,3 +201,15 @@ if os.getenv("DEBUG", "False") != "True":
     SECURE_HSTS_SECONDS = 60
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Content Security Policy
+
+CSP_STYLE_SRC = (
+    "'self'",
+    "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css",
+)
+
+CSP_INCLUDE_NONCE_IN = ["script-src", "style-src"]
+CSP_SCRIPT_SRC = "'self'"
